@@ -3,14 +3,16 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { emailValidator } from './email-validator';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'formulaire_validation';
+ 
+user : User | undefined ;
 
 constructor(public formBuilder : FormBuilder){}
 
@@ -31,6 +33,8 @@ userForm = this.formBuilder.group({
 
 
 onSubmit(){
-  console.log(this.userForm.value);
+  console.log(this.userForm.value)
+  }
+  
 }
-}
+

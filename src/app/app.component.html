@@ -1,31 +1,28 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-    <div>
-        <label>
-            Username:
-            <input type="text" formControlName="username"/>
-
-            <div *ngIf="userForm.controls['username'].errors && !userForm.controls['username'].pristine" class="error-msg">
-                <div [hidden]="!userForm.controls['username'].errors.required">username is required. 
-                </div>
-                <div [hidden]="!userForm.controls['username'].invalid">username is invalid.</div>
-            </div>
-        </label>
+    
 
         <div formGroupName="credentials">
-          <div>
-              <label>
-                  Password:
-                  <input type="email" formControlName="email">
-                  {{ userForm.get('credentials.email').errors?.email.rules }}
-                  <div *ngIf="userForm.get('credentials.email').errors && !userForm.get('credentials.email').pristine" class="error-msg">
-                      <div [hidden]="!userForm.get('credentials.email').errors.required">inscrire votre email.</div>
-                      <div [hidden]="!userForm.get('credentials.email').invalid">email is invalid.</div>
-                  </div>
-              </label>
-          </div>
+         
+          <label>
+            Email:
+            <input type="email" formControlName="email">
+          </label>
+          <div *ngIf="userForm.get('credentials.email')?.invalid && (userForm.get('credentials.email')?.dirty || userForm.get('credentials.email')?.touched)" class="alert alert-danger">
+              <div *ngIf="userForm.get('credentials.email')?.errors?.['required']">
+               l'email est requis.
+              </div>
+              <div *ngIf="userForm.get('credentials.email')?.errors?.['email']">
+                {{ userForm.get('credentials.email')?.errors?.['email'].rules }}
+              </div>
+            </div>
+            
+          <label>
+              Mot de passe:
+              <input type="password" formControlName="password">
+          </label>
       </div>
-
-    </div>
+   
     
     <button >envoyer</button>
 </form>
+
